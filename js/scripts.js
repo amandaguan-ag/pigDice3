@@ -10,38 +10,28 @@ var Player = function(name) {
   this.currentTurnArray = [];
 }
 
+//Creates our two players
 var playerOne = new Player("Player One");
 var playerTwo = new Player("Player Two");
 console.log(playerOne, playerTwo);
 
 
-// var playerOne = {
-//   lastRoll: "",
-//   turnRunningScore: 0,
-//   currentTurnArray: [],
-//   totalBankedScore:"",
-// }
-//
-// var playerTwo = {
-//   lastRoll: "",
-//   turnRunningScore: 0,
-//   currentTurnArray: [],
-//   totalBankedScore:"",
-// }
-
-// Gets a random number between 1 and 6
+// Dice Constructor (argument = number of sides you want. default = 6)
 
 var Dice = function(sides) {
   this.sides = sides || 6;
 }
 
-// Roll Prototype
+// Roll Prototype - Gets a random number between 1 and 6
 Dice.prototype.roll = function() {
-  return Math.floor((Math.random() * this.sides ) + 1);
+  var roll = Math.floor((Math.random() * this.sides ) + 1);
+  return roll;
 }
 
-// Current Roll Array Prototype
-
+// Current Turn Array Prototype
+Player.prototype.currentRoll = function (x) {
+  this.currentTurnArray.push(x)
+}
 
 // Add roll to array
 var rollArray = [];
@@ -69,10 +59,21 @@ var sixSidedDice = new Dice();
 $(function() {
   $("#player-one-roll, #player-two-roll").click(function(event) {
     event.preventDefault();
-    sixSidedDice.roll();
-    console.log(sixSidedDice.roll());
-    $("#player-one-running").html("<h1 class='running-total'>" + sixSidedDice.roll() + "</h1>");
 
+    var sixSidedDiceRoll = sixSidedDice.roll();
+
+    // if (sixSidedDiceRoll === 1) {
+    //   // Player.turnRunningScore = 0;
+    //   // $("#player-one-running").hide();
+    //   $("#player-one-rolls-one").show("1. Turn over!");
+    //   // alert("You lose!");
+    // } else {
+      $("#player-one-running").html("<h1 class='running-total'>" + sixSidedDiceRoll + "</h1>");
+    // }
+    console.log(sixSidedDiceRoll);
+
+
+    playerOne.currentRoll(sixSidedDiceRoll);
 
 
   });
