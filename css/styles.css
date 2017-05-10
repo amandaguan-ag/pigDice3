@@ -9,3 +9,10 @@ h1 {
 .running-total {
   color: red;
 }
+
+.player-one-rolls-one {
+  font-size: 36px;
+  color: red;
+  text-align: center;
+  display: none;
+}
