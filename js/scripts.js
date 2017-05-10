@@ -42,9 +42,8 @@ Player.prototype.sumOfRolls = function() {
     this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
     console.log(this.turnRunningScore);
   }
-  return this.turnRunningScore;
 }
-console.log(playerOne.sumOfRolls());
+console.log(playerOne.turnRunningScore);
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
@@ -58,11 +57,12 @@ $(function() {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
 
-    $("#player-one-running").html("<h1 class='running-total'>" + sixSidedDiceRoll + "</h1>");
-    console.log(sixSidedDiceRoll);
-
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
+
+    $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
+    console.log(sixSidedDiceRoll);
+
 
   });
 });
