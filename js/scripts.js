@@ -5,7 +5,7 @@
 function Player(name) {
   this.name = name;
   this.turnRunningScore = 0;
-  this.totalBankedScore;
+  this.totalBankedScore = 0;
   this.lastRoll;
   this.currentTurnArray = [];
 }
@@ -45,6 +45,17 @@ Player.prototype.sumOfRolls = function() {
 }
 console.log(playerOne.turnRunningScore);
 
+// Bank points
+Player.prototype.bankPoints = function() {
+  this.totalBankedScore += this.turnRunningScore;
+}
+
+// End game when player score reaches 100
+
+// Player.prototype.winGame = function() {
+//
+// }
+
 // Create six-sided dice
 var sixSidedDice = new Dice();
 
@@ -59,9 +70,24 @@ $(function() {
 
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
+    playerOne.bankPoints();
 
     $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
     console.log(sixSidedDiceRoll);
+
+    if (sixSidedDiceRoll === 1) {
+      $("#test").attr("src", "img/one.png");
+    } else if (sixSidedDiceRoll === 2) {
+      $("#test").attr("src", "img/two.png");
+    } else if (sixSidedDiceRoll === 3) {
+      $("#test").attr("src", "img/three.png");
+    } else if (sixSidedDiceRoll === 4) {
+      $("#test").attr("src", "img/four.png");
+    } else if (sixSidedDiceRoll === 5) {
+      $("#test").attr("src", "img/five.png");
+    } else if (sixSidedDiceRoll === 6) {
+      $("#test").attr("src", "img/six.png");
+    }
 
 
   });

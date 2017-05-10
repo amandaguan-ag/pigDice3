@@ -19,7 +19,7 @@
           <hr>
           <!-- <form id="player-one-form" action="index.html" method="post"> -->
             <button type="submit" class="btn" name="button" id="player-one-roll">Roll</button>
-            <button type="submit" class="btn" name="button" id="player-one-hold">Hold</button>
+            <button type="submit" class="btn" name="button" id="player-one-hold">Stay</button>
           <!-- </form> -->
           <h3>Turn Running Total</h3>
           <div id="player-one-running">
@@ -28,7 +28,9 @@
           <h4><span class="player-one-score">Placeholder number</span></h4>
         </div><!--Col closes-->
         <div class="col-md-4">
-          <img src="https://cdn.pixabay.com/photo/2017/01/31/20/15/dice-2026955_960_720.png">
+          <div id="dice-image">
+            <img src="img/pig.jpg" id="test">
+          </div>
           <p><span class="player-one-rolls-one">You rolled a 1!</p>
           <p><span class="player-one-rolls-one">Your turn is over.</p></span>
           <p><span class="turn-total"></p>
@@ -39,7 +41,7 @@
           <h2>Player 2</h2>
           <hr>
           <button type="submit" class="btn" name="button" id="player-two-roll">Roll</button>
-          <button type="submit" class="btn" name="button" id="player-two-hold">Hold</button>
+          <button type="submit" class="btn" name="button" id="player-two-hold">Stay</button>
           <h3>Turn Running Total</h3>
           <div id="player-two-running">
           </div>
