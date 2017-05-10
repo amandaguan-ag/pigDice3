@@ -42,19 +42,11 @@ Player.prototype.sumOfRolls = function() {
     this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
     console.log(this.turnRunningScore);
   }
+  return this.turnRunningScore;
 }
+console.log(playerOne.sumOfRolls());
 
-// Loop to get running turn total into array inside player objects
-
-// (Dice.prototype.roll).forEach(function(){
-//   currentTurnRoll.push(lastRoll);
-// });
-
-// Dice.prototype.runningTurnTotal = function() {
-//   var total = 0;
-//   var total +=
-// }
-
+// Create six-sided dice
 var sixSidedDice = new Dice();
 
 // console.log(sixSidedDice.roll());
@@ -66,14 +58,7 @@ $(function() {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
 
-    // if (sixSidedDiceRoll === 1) {
-    //   // Player.turnRunningScore = 0;
-    //   // $("#player-one-running").hide();
-    //   $("#player-one-rolls-one").show("1. Turn over!");
-    //   // alert("You lose!");
-    // } else {
-      $("#player-one-running").html("<h1 class='running-total'>" + sixSidedDiceRoll + "</h1>");
-    // }
+    $("#player-one-running").html("<h1 class='running-total'>" + sixSidedDiceRoll + "</h1>");
     console.log(sixSidedDiceRoll);
 
     playerOne.addRollToArray(sixSidedDiceRoll);
