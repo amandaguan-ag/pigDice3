@@ -76,7 +76,7 @@ Player.prototype.setLastRoll = function(x) {
 // Prototype to reset running total if 1 is rolled
 Player.prototype.resetRunningTotalOnOne = function() {
   if (this.lastRoll === 1) {
-    playerOne.turnRunningScore = 0;
+    this.turnRunningScore = 0;
   }
 }
 
