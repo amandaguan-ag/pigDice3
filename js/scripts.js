@@ -77,7 +77,7 @@ $(function() {
   $("#player-one-roll").on("click", function() {
     var animationName = 'animated tada';
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-    $("#test").addClass(animationName).one(animationEnd, function() {
+    $("#dice-pic").addClass(animationName).one(animationEnd, function() {
       $(this).removeClass(animationName);
     });
   });
@@ -92,11 +92,9 @@ $(function() {
 
     $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
 
-    $("#winner").html("<h1 class='running-total'>" + playerOne.totalBankedScore + "</h1>");
-
     //Change image based on dice roll, AND swith player turn
     if (sixSidedDiceRoll === 1) {
-      $("#test").attr("src", "img/one.png");
+      $("#dice-pic").attr("src", "img/one.png");
       var playerOneTurn = false;
       if (!playerOneTurn) {
          $("#player-two-buttons").show();
@@ -106,15 +104,15 @@ $(function() {
         $("#player-two-buttons").hide();
       }
     } else if (sixSidedDiceRoll === 2) {
-      $("#test").attr("src", "img/two.png");
+      $("#dice-pic").attr("src", "img/two.png");
     } else if (sixSidedDiceRoll === 3) {
-      $("#test").attr("src", "img/three.png");
+      $("#dice-pic").attr("src", "img/three.png");
     } else if (sixSidedDiceRoll === 4) {
-      $("#test").attr("src", "img/four.png");
+      $("#dice-pic").attr("src", "img/four.png");
     } else if (sixSidedDiceRoll === 5) {
-      $("#test").attr("src", "img/five.png");
+      $("#dice-pic").attr("src", "img/five.png");
     } else if (sixSidedDiceRoll === 6) {
-      $("#test").attr("src", "img/six.png");
+      $("#dice-pic").attr("src", "img/six.png");
     }
   });
 
@@ -160,11 +158,9 @@ $("#player-one-stay").click(function(event) {
 
     $("#player-two-running").html("<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>");
 
-    $("#winner").html("<h1 class='running-total'>" + playerTwo.totalBankedScore + "</h1>");
-
     //Change image based on dice roll, AND swith player turn
     if (sixSidedDiceRoll === 1) {
-      $("#test").attr("src", "img/one.png");
+      $("#dice-pic").attr("src", "img/one.png");
       var playerOneTurn = true;
       if (playerOneTurn) {
          $("#player-one-buttons").show();
@@ -174,15 +170,15 @@ $("#player-one-stay").click(function(event) {
         $("#player-one-buttons").hide();
       }
     } else if (sixSidedDiceRoll === 2) {
-      $("#test").attr("src", "img/two.png");
+      $("#dice-pic").attr("src", "img/two.png");
     } else if (sixSidedDiceRoll === 3) {
-      $("#test").attr("src", "img/three.png");
+      $("#dice-pic").attr("src", "img/three.png");
     } else if (sixSidedDiceRoll === 4) {
-      $("#test").attr("src", "img/four.png");
+      $("#dice-pic").attr("src", "img/four.png");
     } else if (sixSidedDiceRoll === 5) {
-      $("#test").attr("src", "img/five.png");
+      $("#dice-pic").attr("src", "img/five.png");
     } else if (sixSidedDiceRoll === 6) {
-      $("#test").attr("src", "img/six.png");
+      $("#dice-pic").attr("src", "img/six.png");
     }
   });
 
@@ -190,7 +186,7 @@ $("#player-one-stay").click(function(event) {
 $("#player-two-roll").on("click", function() {
   var animationName = 'animated tada';
   var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-  $("#test").addClass(animationName).one(animationEnd, function() {
+  $("#dice-pic").addClass(animationName).one(animationEnd, function() {
     $(this).removeClass(animationName);
   });
 });
