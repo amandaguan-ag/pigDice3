@@ -50,11 +50,26 @@ Player.prototype.bankPoints = function() {
   this.totalBankedScore += this.turnRunningScore;
 }
 
-// End game when player score reaches 100
+// Hold/Stay turnRunningScore <--Added this, score will bank when a user presses stay
 
-// Player.prototype.winGame = function() {
-//
-// }
+Player.prototype.stayTurn = function () {
+  var stayButton = document.getElementById("player-one-stay");
+
+  stayButton.onclick = function() {
+  document.getElementById("stay").innerText = "Pass the keyboard along! You have chosen to stay your turn.";
+ }
+  playerOne.bankPoints();
+  playerOne.turnRunningScore = 0;
+}
+
+
+// End game when player score reaches 100 <--Added this, but alert doesn't pop up when banked score reaches 100
+
+Player.prototype.winGame = function () {
+  if (this.totalBankedScore >= 100) {
+    alert("We have a winner!");
+  }
+}
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
@@ -70,9 +85,10 @@ $(function() {
 
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
-    playerOne.bankPoints();
+    playerOne.winGame();
 
     $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
+
     console.log(sixSidedDiceRoll);
 
     if (sixSidedDiceRoll === 1) {
@@ -90,5 +106,13 @@ $(function() {
     }
 
 
+  });
+
+  // Undefined is displaying when clicked, want to display message about turn stay
+  
+$("#player-one-stay").click(function(event) {
+  event.preventDefault();
+  // playerOne.stayTurn();
+      $("#hold").html("<h1 class='running-total'>" + playerOne.stayTurn() + "</h1>");
   });
 });
