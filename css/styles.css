@@ -1,25 +1,43 @@
+body {
+  text-align: center;
+}
+
 img {
   width: 100%;
 }
 
 h1 {
   text-align: center;
+  font-family: 'Erica One', sans-serif;
+}
+
+h2 {
+  font-family: 'Erica One', sans-serif;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
 }
 
 .running-total {
-  color: red;
+  font-family: 'Roboto', sans-serif;
 }
 
 .total-score {
-  color: red;
-  font-size: 72px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 48px;
 }
 
 .player-one-rolls-one {
   font-size: 36px;
-  color: red;
+  font-family: 'Erica One', sans-serif;
   text-align: center;
   display: none;
+}
+
+.player-col {
+  border: 10px solid black;
+  border-radius: 6px;
 }
 
 #winner {
