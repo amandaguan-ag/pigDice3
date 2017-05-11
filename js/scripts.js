@@ -35,12 +35,16 @@ Player.prototype.addRollToArray = function (x) {
   this.currentTurnArray.push(x)
 }
 
-// Get sum of Turn Running Total
+// Get sum of Turn Running Total (and exclude 1s from total)
 Player.prototype.sumOfRolls = function() {
   console.log(this.currentTurnArray);
   for (var i = 0; i < this.currentTurnArray.length; i++) {
-    this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
-    console.log(this.turnRunningScore);
+    if (this.currentTurnArray[i = this.currentTurnArray.length - 1] === 1) {
+      this.turnRunningScore = this.turnRunningScore
+    } else {
+      this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
+      console.log(this.turnRunningScore);
+    }
   }
 }
 console.log(playerOne.turnRunningScore);
@@ -88,6 +92,7 @@ $(function() {
     } else if (sixSidedDiceRoll === 6) {
       $("#test").attr("src", "img/six.png");
     }
+
 
 
   });
