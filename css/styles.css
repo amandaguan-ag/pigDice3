@@ -25,3 +25,7 @@ h1 {
 #winner {
   display: none;
 }
+
+#player-two-buttons {
+  display: none;
+}
