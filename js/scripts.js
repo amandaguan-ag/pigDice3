@@ -1,7 +1,6 @@
 // Business logic
 
 //Player Object Constructor
-
 function Player(name) {
   this.name = name;
   this.turnRunningScore = 0;
@@ -16,7 +15,6 @@ var playerTwo = new Player("Player Two");
 console.log(playerOne, playerTwo);
 
 // Dice Constructor (argument = number of sides you want. default = 6)
-
 function Dice(sides) {
   this.sides = sides || 6;
 }
@@ -52,25 +50,13 @@ console.log(playerOne.turnRunningScore);
 // Bank points and check if winner
 Player.prototype.bankPoints = function() {
   this.totalBankedScore += this.turnRunningScore;
-  // if (this.totalBankedScore >= 10) {
-  //   return "You win!!!";
-  // } else {
-  //   return "";
-  // }
 }
 
 // Hold/Stay turnRunningScore <--Added this, score will bank when a user presses stay
-
 Player.prototype.stayTurn = function () {
-  // var stayButton = document.getElementById("player-one-stay");
-
- //  stayButton.onclick = function() {
- //  document.getElementById("stay").innerText = "Pass the keyboard along! You have chosen to stay your turn.";
- // }
   playerOne.bankPoints();
   playerOne.turnRunningScore = 0;
 }
-
 
 // End game when player score reaches 100 <--Added this, but alert doesn't pop up when banked score reaches 100
 
@@ -82,20 +68,18 @@ Player.prototype.stayTurn = function () {
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
-// console.log(sixSidedDice.roll());
 
 //Prototype to enter last roll value into player object
 Player.prototype.setLastRoll = function(x) {
   this.lastRoll = x;
 }
 
-// // Prototype to reset running total if 1 is rolled
+// Prototype to reset running total if 1 is rolled
 Player.prototype.resetRunningTotalOnOne = function() {
   if (this.lastRoll === 1) {
     playerOne.turnRunningScore = 0;
   }
 }
-
 
 // Front end logic
 
@@ -140,7 +124,7 @@ $("#player-one-stay").click(function(event) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
-    $("#winner").text("pizza rules");
+    $("#winner").text("");
   }
   });
 });
