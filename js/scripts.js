@@ -40,7 +40,7 @@ Player.prototype.sumOfRolls = function() {
   console.log(this.currentTurnArray);
   for (var i = 0; i < this.currentTurnArray.length; i++) {
     if (this.currentTurnArray[i = this.currentTurnArray.length - 1] === 1) {
-      this.turnRunningScore = this.turnRunningScore
+      this.turnRunningScore = this.turnRunningScore;
     } else {
       this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
       console.log(this.turnRunningScore);
@@ -49,9 +49,12 @@ Player.prototype.sumOfRolls = function() {
 }
 console.log(playerOne.turnRunningScore);
 
-// Bank points
+// Bank points and check if winner
 Player.prototype.bankPoints = function() {
   this.totalBankedScore += this.turnRunningScore;
+  //   if (this.totalBankedScore >= 10) {
+  //   return "You win!!!";
+  // }
 }
 
 // Hold/Stay turnRunningScore <--Added this, score will bank when a user presses stay
@@ -69,20 +72,27 @@ Player.prototype.stayTurn = function () {
 
 // End game when player score reaches 100 <--Added this, but alert doesn't pop up when banked score reaches 100
 
-Player.prototype.winGame = function () {
-  if (this.totalBankedScore >= 100) {
-    alert("We have a winner!");
-  }
-}
+// Player.prototype.winGame = function () {
+//   if (this.totalBankedScore >= 14) {
+//     alert("We have a winner!");
+//   }
+// }
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
 // console.log(sixSidedDice.roll());
 
 //Prototype to enter last roll value into player object
-// Player.prototype.lastRoll = function(x) {
-//   this.lastRoll = x
-// }
+Player.prototype.setLastRoll = function(x) {
+  this.lastRoll = x;
+}
+
+// // Prototype to reset running total if 1 is rolled
+Player.prototype.resetRunningTotalOnOne = function() {
+  if (this.lastRoll === 1) {
+    playerOne.turnRunningScore = 0;
+  }
+}
 
 
 // Front end logic
@@ -91,16 +101,14 @@ $(function() {
   $("#player-one-roll").click(function(event) {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
-
-    // playerOne.lastRoll(sixSidedDiceRoll);
-    // Object.defineProperty(playerOne, lastRoll)
+    playerOne.setLastRoll(sixSidedDiceRoll);
+    playerOne.resetRunningTotalOnOne(sixSidedDiceRoll);
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
-    playerOne.winGame();
 
     $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
 
-    console.log(sixSidedDiceRoll);
+    $("#winner").html("<h1 class='running-total'>" + playerOne.totalBankedScore + "</h1>");
 
     if (sixSidedDiceRoll === 1) {
       $("#test").attr("src", "img/one.png");
@@ -116,15 +124,15 @@ $(function() {
       $("#test").attr("src", "img/six.png");
     }
 
-
-
   });
 
   // Undefined is displaying when clicked, want to display message about turn stay
 
 $("#player-one-stay").click(function(event) {
   event.preventDefault();
+
   playerOne.stayTurn();
+  $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
   $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
       // $("#hold").html("<h1 class='running-total'>" + playerOne.stayButton() + "</h1>");
   });
