@@ -1,5 +1,24 @@
 // Business logic
 
+//Turn Object
+var Turn = {
+  whichPlayer:
+}
+
+//Prototype to set value of whichPlayer in Turn Object
+Turn.prototype.setPlayer = function(button) {
+
+  // if the button that is pushed is player 1 button the player is player 1
+  // else if the button that is pushed is player 2 button the player is player 2
+
+  if (button == $("#player-one-roll") || button == $("#player-one-stay")) {
+    this.whichPlayer = playerOne;
+  } else if (button == $("#player-two-roll")) || button == $("#player-two-stay")) {
+    this.whichPlayer = playerTwo;
+  }
+}
+
+
 //Player Object Constructor
 function Player(name) {
   this.name = name;
@@ -83,6 +102,8 @@ Player.prototype.resetRunningTotalOnOne = function() {
 // Front end logic
 
 //Roll Button Click Event
+
+
 $(function() {
   $("#player-one-roll").click(function(event) {
     event.preventDefault();
