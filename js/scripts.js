@@ -1,20 +1,5 @@
 // Business logic
 
-
-//Prototype to set value of whichPlayer in Turn Object
-// Turn.prototype.setPlayer = function(button) {
-//
-//   // if the button that is pushed is player 1 button the player is player 1
-//   // else if the button that is pushed is player 2 button the player is player 2
-//
-//   if (button == $("#player-one-roll") || button == $("#player-one-stay")) {
-//     this.whichPlayer = playerOne;
-//   } else if (button == $("#player-two-roll") || button == $("#player-two-stay")) {
-//     this.whichPlayer = playerTwo;
-//   }
-// }
-
-
 //Player Object Constructor
 function Player(name) {
   this.name = name;
@@ -49,18 +34,14 @@ Player.prototype.addRollToArray = function (x) {
 
 // Get sum of Turn Running Total (and exclude 1s from total)
 Player.prototype.sumOfRolls = function() {
-  console.log(this.currentTurnArray);
   for (var i = 0; i < this.currentTurnArray.length; i++) {
     if (this.currentTurnArray[i = this.currentTurnArray.length - 1] === 1) {
       this.turnRunningScore = this.turnRunningScore;
     } else {
       this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
-      console.log(this.turnRunningScore);
     }
   }
 }
-// console.log(playerOne.turnRunningScore);
-
 // Prototype to Bank points
 Player.prototype.bankPoints = function() {
   this.totalBankedScore += this.turnRunningScore;
@@ -71,14 +52,6 @@ Player.prototype.stayTurn = function () {
   this.bankPoints();
   this.turnRunningScore = 0;
 }
-
-// End game when player score reaches 100 <--Added this, but alert doesn't pop up when banked score reaches 100
-
-// Player.prototype.winGame = function () {
-//   if (this.totalBankedScore >= 14) {
-//     alert("We have a winner!");
-//   }
-// }
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
@@ -95,27 +68,29 @@ Player.prototype.resetRunningTotalOnOne = function() {
   }
 }
 
-// Front end logic
+// FRONT END LOGIC
 
 $(function() {
 
   var playerOneTurn = true;
 
 
+
+
 // $button set one
 
 // $button set playerTwo
-  if (!playerOneTurn) {
-     $("#player-two-buttons").show();
-     $("#player-one-buttons").hide();
-  } else {
+  // if (!playerOneTurn) {
+  //    $("#player-two-buttons").show();
+  //    $("#player-one-buttons").hide();
+  // } else {
     //  wait for your turn
     // $("#player-one-buttons").hide();
-    alert("else is working");
-  }
+  // }
 
-  //Roll Button Click Event
+  //PLAYER ONE
 
+  //Player One Roll Button Click Event
   $("#player-one-roll").click(function(event) {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
@@ -132,6 +107,13 @@ $(function() {
     if (sixSidedDiceRoll === 1) {
       $("#test").attr("src", "img/one.png");
       var playerOneTurn = false;
+      if (!playerOneTurn) {
+         $("#player-two-buttons").show();
+         $("#player-one-buttons").hide();
+      } else {
+        $("#player-one-buttons").show();
+        $("#player-two-buttons").hide();
+      }
     } else if (sixSidedDiceRoll === 2) {
       $("#test").attr("src", "img/two.png");
     } else if (sixSidedDiceRoll === 3) {
@@ -153,7 +135,7 @@ $("#player-one-stay").click(function(event) {
   $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
   $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
 
-  if (playerOne.totalBankedScore >= 100) {
+  if (playerOne.totalBankedScore >= 20) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
@@ -161,17 +143,84 @@ $("#player-one-stay").click(function(event) {
   }
 
   var playerOneTurn = false;
-  
+
   // $button set playerTwo
     if (!playerOneTurn) {
        $("#player-two-buttons").show();
        $("#player-one-buttons").hide();
     } else {
-      //  wait for your turn
-      // $("#player-one-buttons").hide();
-      alert("else is working");
+
+      $("#player-two-buttons").hide();
+      $("#player-one-buttons").show();
     }
+  });
 
+  /// PLAYER TWO STUFF!!!!!!!!
 
+  //Roll Button Click Event
+
+  $("#player-two-roll").click(function(event) {
+    event.preventDefault();
+    var sixSidedDiceRoll = sixSidedDice.roll();
+    playerTwo.setLastRoll(sixSidedDiceRoll);
+    playerTwo.resetRunningTotalOnOne(sixSidedDiceRoll);
+    playerTwo.addRollToArray(sixSidedDiceRoll);
+    playerTwo.sumOfRolls();
+
+    $("#player-two-running").html("<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>");
+
+    $("#winner").html("<h1 class='running-total'>" + playerTwo.totalBankedScore + "</h1>");
+
+    //Change image based on dice roll, AND swith player turn
+    if (sixSidedDiceRoll === 1) {
+      $("#test").attr("src", "img/one.png");
+      var playerOneTurn = true;
+      if (playerOneTurn) {
+         $("#player-one-buttons").show();
+         $("#player-two-buttons").hide();
+      } else {
+        $("#player-two-buttons").show();
+        $("#player-one-buttons").hide();
+      }
+    } else if (sixSidedDiceRoll === 2) {
+      $("#test").attr("src", "img/two.png");
+    } else if (sixSidedDiceRoll === 3) {
+      $("#test").attr("src", "img/three.png");
+    } else if (sixSidedDiceRoll === 4) {
+      $("#test").attr("src", "img/four.png");
+    } else if (sixSidedDiceRoll === 5) {
+      $("#test").attr("src", "img/five.png");
+    } else if (sixSidedDiceRoll === 6) {
+      $("#test").attr("src", "img/six.png");
+    }
+  });
+
+//Player Two Stay Button Click Event
+$("#player-two-stay").click(function(event) {
+  event.preventDefault();
+
+  // What happens when a user clicks the stay button
+  playerTwo.stayTurn();
+  $("#player-two-running").html("<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>");
+  $("#player-two-score").html("<h1 class='total-score'>" + playerTwo.totalBankedScore + "</h1>");
+
+  // Win condition
+  if (playerTwo.totalBankedScore >= 20) {
+    $("#winner").show();
+    $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
+  } else {
+    $("#winner").text("");
+  }
+
+  var playerOneTurn = true;
+
+  // Toggle between players
+    if (playerOneTurn) {
+       $("#player-one-buttons").show();
+       $("#player-two-buttons").hide();
+    } else {
+      $("#player-two-buttons").show();
+      $("#player-one-buttons").hide();
+    }
   });
 });
