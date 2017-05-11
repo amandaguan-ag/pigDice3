@@ -71,28 +71,7 @@ Player.prototype.resetRunningTotalOnOne = function() {
 // FRONT END LOGIC
 
 $(function() {
-
-  // $.fn.extend({
-  //   animateCss: function (animationName) {
-  //       var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-  //       this.addClass('animated ' + animationName).one(animationEnd, function() {
-  //           $(this).removeClass('animated ' + animationName);
-  //       });
-  //   }
-  // });
-
   var playerOneTurn = true;
-
-// $button set one
-
-// $button set playerTwo
-  // if (!playerOneTurn) {
-  //    $("#player-two-buttons").show();
-  //    $("#player-one-buttons").hide();
-  // } else {
-    //  wait for your turn
-    // $("#player-one-buttons").hide();
-  // }
 
   //PLAYER ONE
   $("#player-one-roll").on("click", function() {
@@ -147,7 +126,7 @@ $("#player-one-stay").click(function(event) {
   $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
   $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
 
-  if (playerOne.totalBankedScore >= 100) {
+  if (playerOne.totalBankedScore >= 20) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
@@ -226,7 +205,7 @@ $("#player-two-stay").click(function(event) {
   $("#player-two-score").html("<h1 class='total-score'>" + playerTwo.totalBankedScore + "</h1>");
 
   // Win condition
-  if (playerTwo.totalBankedScore >= 100) {
+  if (playerTwo.totalBankedScore >= 20) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
