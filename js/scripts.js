@@ -35,12 +35,16 @@ Player.prototype.addRollToArray = function (x) {
   this.currentTurnArray.push(x)
 }
 
-// Get sum of Turn Running Total
+// Get sum of Turn Running Total (and exclude 1s from total)
 Player.prototype.sumOfRolls = function() {
   console.log(this.currentTurnArray);
   for (var i = 0; i < this.currentTurnArray.length; i++) {
-    this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
-    console.log(this.turnRunningScore);
+    if (this.currentTurnArray[i = this.currentTurnArray.length - 1] === 1) {
+      this.turnRunningScore = this.turnRunningScore
+    } else {
+      this.turnRunningScore += this.currentTurnArray[i = this.currentTurnArray.length - 1];
+      console.log(this.turnRunningScore);
+    }
   }
 }
 console.log(playerOne.turnRunningScore);
@@ -76,6 +80,12 @@ var sixSidedDice = new Dice();
 
 // console.log(sixSidedDice.roll());
 
+//Prototype to enter last roll value into player object
+// Player.prototype.lastRoll = function(x) {
+//   this.lastRoll = x
+// }
+
+
 // Front end logic
 
 $(function() {
@@ -109,10 +119,10 @@ $(function() {
   });
 
   // Undefined is displaying when clicked, want to display message about turn stay
-  
+
 $("#player-one-stay").click(function(event) {
   event.preventDefault();
-  // playerOne.stayTurn();
-      $("#hold").html("<h1 class='running-total'>" + playerOne.stayTurn() + "</h1>");
+  playerOne.stayTurn();
+      $("#hold").html("<h1 class='running-total'>" + playerOne.stayButton() + "</h1>");
   });
 });
