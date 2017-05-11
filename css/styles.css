@@ -10,6 +10,11 @@ h1 {
   color: red;
 }
 
+.total-score {
+  color: red;
+  font-size: 72px;
+}
+
 .player-one-rolls-one {
   font-size: 36px;
   color: red;

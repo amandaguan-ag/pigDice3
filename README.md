@@ -30,11 +30,6 @@ The first player to score 100 or more points wins.
 * `git clone` this repository
 * Open index.html file in a browser such as Google Chrome
 
-Or, more simply:
-
-* Download this repository
-* Open index.html in web browser.
-
 ## How to Use
 
 *

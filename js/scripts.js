@@ -125,6 +125,7 @@ $(function() {
 $("#player-one-stay").click(function(event) {
   event.preventDefault();
   playerOne.stayTurn();
-      $("#hold").html("<h1 class='running-total'>" + playerOne.stayButton() + "</h1>");
+  $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
+      // $("#hold").html("<h1 class='running-total'>" + playerOne.stayButton() + "</h1>");
   });
 });
