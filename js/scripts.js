@@ -52,19 +52,21 @@ console.log(playerOne.turnRunningScore);
 // Bank points and check if winner
 Player.prototype.bankPoints = function() {
   this.totalBankedScore += this.turnRunningScore;
-  //   if (this.totalBankedScore >= 10) {
+  // if (this.totalBankedScore >= 10) {
   //   return "You win!!!";
+  // } else {
+  //   return "";
   // }
 }
 
 // Hold/Stay turnRunningScore <--Added this, score will bank when a user presses stay
 
 Player.prototype.stayTurn = function () {
-  var stayButton = document.getElementById("player-one-stay");
+  // var stayButton = document.getElementById("player-one-stay");
 
-  stayButton.onclick = function() {
-  document.getElementById("stay").innerText = "Pass the keyboard along! You have chosen to stay your turn.";
- }
+ //  stayButton.onclick = function() {
+ //  document.getElementById("stay").innerText = "Pass the keyboard along! You have chosen to stay your turn.";
+ // }
   playerOne.bankPoints();
   playerOne.turnRunningScore = 0;
 }
@@ -97,6 +99,7 @@ Player.prototype.resetRunningTotalOnOne = function() {
 
 // Front end logic
 
+//Roll Button Click Event
 $(function() {
   $("#player-one-roll").click(function(event) {
     event.preventDefault();
@@ -123,17 +126,21 @@ $(function() {
     } else if (sixSidedDiceRoll === 6) {
       $("#test").attr("src", "img/six.png");
     }
-
   });
 
-  // Undefined is displaying when clicked, want to display message about turn stay
-
+//Player One Stay Button Click Event
 $("#player-one-stay").click(function(event) {
   event.preventDefault();
 
   playerOne.stayTurn();
   $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
   $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
-      // $("#hold").html("<h1 class='running-total'>" + playerOne.stayButton() + "</h1>");
+
+  if (playerOne.totalBankedScore >= 100) {
+    $("#winner").show();
+    $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
+  } else {
+    $("#winner").text("pizza rules");
+  }
   });
 });
