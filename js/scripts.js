@@ -22,7 +22,7 @@ function Dice(sides) {
 Dice.prototype.roll = function() {
   var roll = Math.floor((Math.random() * this.sides ) + 1);
   if (roll === 1) {
-    alert("hey");
+    alert("Doh! You rolled a 1. Your turn is over.");
   }
   return roll;
 }
@@ -72,10 +72,16 @@ Player.prototype.resetRunningTotalOnOne = function() {
 
 $(function() {
 
+  // $.fn.extend({
+  //   animateCss: function (animationName) {
+  //       var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+  //       this.addClass('animated ' + animationName).one(animationEnd, function() {
+  //           $(this).removeClass('animated ' + animationName);
+  //       });
+  //   }
+  // });
+
   var playerOneTurn = true;
-
-
-
 
 // $button set one
 
@@ -89,7 +95,13 @@ $(function() {
   // }
 
   //PLAYER ONE
-
+  $("#player-one-roll").on("click", function() {
+    var animationName = 'animated tada';
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    $("#test").addClass(animationName).one(animationEnd, function() {
+      $(this).removeClass(animationName);
+    });
+  });
   //Player One Roll Button Click Event
   $("#player-one-roll").click(function(event) {
     event.preventDefault();
@@ -135,7 +147,7 @@ $("#player-one-stay").click(function(event) {
   $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
   $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
 
-  if (playerOne.totalBankedScore >= 20) {
+  if (playerOne.totalBankedScore >= 100) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
@@ -155,7 +167,7 @@ $("#player-one-stay").click(function(event) {
     }
   });
 
-  /// PLAYER TWO STUFF!!!!!!!!
+  /// PLAYER TWO
 
   //Roll Button Click Event
 
@@ -195,6 +207,15 @@ $("#player-one-stay").click(function(event) {
     }
   });
 
+// Player Two animationEnd
+$("#player-two-roll").on("click", function() {
+  var animationName = 'animated tada';
+  var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+  $("#test").addClass(animationName).one(animationEnd, function() {
+    $(this).removeClass(animationName);
+  });
+});
+
 //Player Two Stay Button Click Event
 $("#player-two-stay").click(function(event) {
   event.preventDefault();
@@ -205,7 +226,7 @@ $("#player-two-stay").click(function(event) {
   $("#player-two-score").html("<h1 class='total-score'>" + playerTwo.totalBankedScore + "</h1>");
 
   // Win condition
-  if (playerTwo.totalBankedScore >= 20) {
+  if (playerTwo.totalBankedScore >= 100) {
     $("#winner").show();
     $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
   } else {
