@@ -12,7 +12,6 @@ function Player(name) {
 //Creates our two players
 var playerOne = new Player("Player One");
 var playerTwo = new Player("Player Two");
-console.log(playerOne, playerTwo);
 
 // Dice Constructor (argument = number of sides you want. default = 6)
 function Dice(sides) {
@@ -45,7 +44,7 @@ Player.prototype.sumOfRolls = function() {
     }
   }
 }
-console.log(playerOne.turnRunningScore);
+// console.log(playerOne.turnRunningScore);
 
 // Bank points and check if winner
 Player.prototype.bankPoints = function() {
@@ -54,8 +53,8 @@ Player.prototype.bankPoints = function() {
 
 // Hold/Stay turnRunningScore <--Added this, score will bank when a user presses stay
 Player.prototype.stayTurn = function () {
-  playerOne.bankPoints();
-  playerOne.turnRunningScore = 0;
+  this.bankPoints();
+  this.turnRunningScore = 0;
 }
 
 // End game when player score reaches 100 <--Added this, but alert doesn't pop up when banked score reaches 100
