@@ -6,7 +6,7 @@ function Player(name) {
   this.name = name;
   this.turnRunningScore = 0;
   this.totalBankedScore = 0;
-  this.lastRoll;
+  this.lastRoll = 0;
   this.currentTurnArray = [];
 }
 
@@ -77,7 +77,6 @@ Player.prototype.winGame = function () {
 
 // Create six-sided dice
 var sixSidedDice = new Dice();
-
 // console.log(sixSidedDice.roll());
 
 //Prototype to enter last roll value into player object
@@ -93,6 +92,8 @@ $(function() {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
 
+    // playerOne.lastRoll(sixSidedDiceRoll);
+    // Object.defineProperty(playerOne, lastRoll)
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
     playerOne.winGame();
@@ -114,6 +115,7 @@ $(function() {
     } else if (sixSidedDiceRoll === 6) {
       $("#test").attr("src", "img/six.png");
     }
+
 
 
   });
