@@ -70,19 +70,20 @@ Player.prototype.resetRunningTotalOnOne = function() {
 
 // FRONT END LOGIC
 
-$(function() {
+window.addEventListener("load", function () {
   var playerOneTurn = true;
 
   //PLAYER ONE
-  $("#player-one-roll").on("click", function() {
+  document.getElementById("player-one-roll").addEventListener("click", function () {
     var animationName = 'animated tada';
     var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-    $("#dice-pic").addClass(animationName).one(animationEnd, function() {
-      $(this).removeClass(animationName);
-    });
+    document.getElementById("dice-pic").classList.add(animationName);
+    document.getElementById("dice-pic").addEventListener(animationEnd, function () {
+      this.classList.remove(animationName);
+    }, {once: true});
   });
   //Player One Roll Button Click Event
-  $("#player-one-roll").click(function(event) {
+  document.getElementById("player-one-roll").addEventListener("click", function (event) {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
     playerOne.setLastRoll(sixSidedDiceRoll);
@@ -90,133 +91,133 @@ $(function() {
     playerOne.addRollToArray(sixSidedDiceRoll);
     playerOne.sumOfRolls();
 
-    $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
+    document.getElementById("player-one-running").innerHTML = "<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>";
 
-    //Change image based on dice roll, AND swith player turn
+    //Change image based on dice roll, AND switch player turn
     if (sixSidedDiceRoll === 1) {
-      $("#dice-pic").attr("src", "img/one.png");
-      var playerOneTurn = false;
+      document.getElementById("dice-pic").src = "img/one.png";
+      playerOneTurn = false;
       if (!playerOneTurn) {
-         $("#player-two-buttons").show();
-         $("#player-one-buttons").hide();
+        document.getElementById("player-two-buttons").style.display = "block";
+        document.getElementById("player-one-buttons").style.display = "none";
       } else {
-        $("#player-one-buttons").show();
-        $("#player-two-buttons").hide();
+        document.getElementById("player-one-buttons").style.display = "block";
+        document.getElementById("player-two-buttons").style.display = "none";
       }
     } else if (sixSidedDiceRoll === 2) {
-      $("#dice-pic").attr("src", "img/two.png");
+      document.getElementById("dice-pic").src = "img/two.png";
     } else if (sixSidedDiceRoll === 3) {
-      $("#dice-pic").attr("src", "img/three.png");
+      document.getElementById("dice-pic").src = "img/three.png";
     } else if (sixSidedDiceRoll === 4) {
-      $("#dice-pic").attr("src", "img/four.png");
+      document.getElementById("dice-pic").src = "img/four.png";
     } else if (sixSidedDiceRoll === 5) {
-      $("#dice-pic").attr("src", "img/five.png");
+      document.getElementById("dice-pic").src = "img/five.png";
     } else if (sixSidedDiceRoll === 6) {
-      $("#dice-pic").attr("src", "img/six.png");
+      document.getElementById("dice-pic").src = "img/six.png";
     }
   });
 
-//Player One Stay Button Click Event
-$("#player-one-stay").click(function(event) {
-  event.preventDefault();
+  //Player One Stay Button Click Event
+  document.getElementById("player-one-stay").addEventListener("click", function (event) {
+    event.preventDefault();
 
-  playerOne.stayTurn();
-  $("#player-one-running").html("<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>");
-  $("#player-one-score").html("<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>");
+    playerOne.stayTurn();
+    document.getElementById("player-one-running").innerHTML = "<h1 class='running-total'>" + playerOne.turnRunningScore + "</h1>";
+    document.getElementById("player-one-score").innerHTML = "<h1 class='total-score'>" + playerOne.totalBankedScore + "</h1>";
 
-  if (playerOne.totalBankedScore >= 20) {
-    $("#winner").show();
-    $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
-  } else {
-    $("#winner").text("");
-  }
-
-  var playerOneTurn = false;
-
-  // $button set playerTwo
-    if (!playerOneTurn) {
-       $("#player-two-buttons").show();
-       $("#player-one-buttons").hide();
+    if (playerOne.totalBankedScore >= 20) {
+      document.getElementById("winner").style.display = "block";
+      document.getElementById("winner").innerHTML = "<h1 class='total-score'>" + "You win!!!" + "</h1>";
     } else {
-
-      $("#player-two-buttons").hide();
-      $("#player-one-buttons").show();
+      document.getElementById("winner").textContent = "";
     }
-  });
+
+    playerOneTurn = false;
+
+    // $button set playerTwo
+    if (!playerOneTurn) {
+      document.getElementById("player-two-buttons").style.display = "block";
+      document.getElementById("player-one-buttons").style.display = "none";
+    } else {
+      document.getElementById("player-two-buttons").style.display = "none"
+      document.querySelector("#player-one-buttons").style.display = "block";
+    }
 
   /// PLAYER TWO
 
   //Roll Button Click Event
 
-  $("#player-two-roll").click(function(event) {
+  document.querySelector("#player-two-roll").addEventListener("click", function(event) {
     event.preventDefault();
     var sixSidedDiceRoll = sixSidedDice.roll();
     playerTwo.setLastRoll(sixSidedDiceRoll);
     playerTwo.resetRunningTotalOnOne(sixSidedDiceRoll);
     playerTwo.addRollToArray(sixSidedDiceRoll);
     playerTwo.sumOfRolls();
-
-    $("#player-two-running").html("<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>");
-
+    
+    document.querySelector("#player-two-running").innerHTML = "<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>";
+    
     //Change image based on dice roll, AND swith player turn
     if (sixSidedDiceRoll === 1) {
-      $("#dice-pic").attr("src", "img/one.png");
-      var playerOneTurn = true;
-      if (playerOneTurn) {
-         $("#player-one-buttons").show();
-         $("#player-two-buttons").hide();
-      } else {
-        $("#player-two-buttons").show();
-        $("#player-one-buttons").hide();
-      }
-    } else if (sixSidedDiceRoll === 2) {
-      $("#dice-pic").attr("src", "img/two.png");
-    } else if (sixSidedDiceRoll === 3) {
-      $("#dice-pic").attr("src", "img/three.png");
-    } else if (sixSidedDiceRoll === 4) {
-      $("#dice-pic").attr("src", "img/four.png");
-    } else if (sixSidedDiceRoll === 5) {
-      $("#dice-pic").attr("src", "img/five.png");
-    } else if (sixSidedDiceRoll === 6) {
-      $("#dice-pic").attr("src", "img/six.png");
-    }
-  });
-
-// Player Two animationEnd
-$("#player-two-roll").on("click", function() {
-  var animationName = 'animated tada';
-  var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-  $("#dice-pic").addClass(animationName).one(animationEnd, function() {
-    $(this).removeClass(animationName);
-  });
-});
-
-//Player Two Stay Button Click Event
-$("#player-two-stay").click(function(event) {
-  event.preventDefault();
-
-  // What happens when a user clicks the stay button
-  playerTwo.stayTurn();
-  $("#player-two-running").html("<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>");
-  $("#player-two-score").html("<h1 class='total-score'>" + playerTwo.totalBankedScore + "</h1>");
-
-  // Win condition
-  if (playerTwo.totalBankedScore >= 20) {
-    $("#winner").show();
-    $("#winner").html("<h1 class='total-score'>" + "You win!!!" + "</h1>");
-  } else {
-    $("#winner").text("");
-  }
-
-  var playerOneTurn = true;
-
-  // Toggle between players
+    document.querySelector("#dice-pic").src = "img/one.png";
+    var playerOneTurn = true;
     if (playerOneTurn) {
-       $("#player-one-buttons").show();
-       $("#player-two-buttons").hide();
+    document.querySelector("#player-one-buttons").style.display = "block";
+    document.querySelector("#player-two-buttons").style.display = "none";
     } else {
-      $("#player-two-buttons").show();
-      $("#player-one-buttons").hide();
+    document.querySelector("#player-two-buttons").style.display = "block";
+    document.querySelector("#player-one-buttons").style.display = "none";
     }
-  });
+    } else if (sixSidedDiceRoll === 2) {
+    document.querySelector("#dice-pic").src = "img/two.png";
+    } else if (sixSidedDiceRoll === 3) {
+    document.querySelector("#dice-pic").src = "img/three.png";
+    } else if (sixSidedDiceRoll === 4) {
+    document.querySelector("#dice-pic").src = "img/four.png";
+    } else if (sixSidedDiceRoll === 5) {
+    document.querySelector("#dice-pic").src = "img/five.png";
+    } else if (sixSidedDiceRoll === 6) {
+    document.querySelector("#dice-pic").src = "img/six.png";
+    }
+    });
+    
+    // Player Two animationEnd
+    document.querySelector("#player-two-roll").addEventListener("click", function() {
+    var animationName = 'animated tada';
+    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    document.querySelector("#dice-pic").classList.add(animationName);
+    document.querySelector("#dice-pic").addEventListener(animationEnd, function() {
+    this.classList.remove(animationName);
+    });
+    });
+    
+    //Player Two Stay Button Click Event
+    document.querySelector("#player-two-stay").addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    // What happens when a user clicks the stay button
+    playerTwo.stayTurn();
+    document.querySelector("#player-two-running").innerHTML = "<h1 class='running-total'>" + playerTwo.turnRunningScore + "</h1>";
+    document.querySelector("#player-two-score").innerHTML = "<h1 class='total-score'>" + playerTwo.totalBankedScore + "</h1>";
+    
+    // Win condition
+    if (playerTwo.totalBankedScore >= 20) {
+    document.querySelector("#winner").style.display = "block";
+    document.querySelector("#winner").innerHTML = "<h1 class='total-score'>" + "You win!!!" + "</h1>";
+    } else {
+    document.querySelector("#winner").textContent = "";
+    }
+    
+    var playerOneTurn = true;
+    
+    // Toggle between players
+    if (playerOneTurn) {
+    document.querySelector("#player-one-buttons").style.display = "block";
+    document.querySelector("#player-two-buttons").style.display = "none";
+    } else {
+    document.querySelector("#player-two-buttons").style.display = "block";
+    document.querySelector("#player-one-buttons").style.display = "none";
+    }
+    });
+});
 });
